@@ -1,0 +1,30 @@
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.11.204:8080/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/05/27 18:26:44 Starting gobuster in directory enumeration mode
+===============================================================
+[2K/register             (Status: 200) [Size: 5654]
+[2K/blogs                (Status: 200) [Size: 5371]
+[2K/upload               (Status: 200) [Size: 1857]
+[2K/environment          (Status: 500) [Size: 712]
+[2K/error                (Status: 500) [Size: 106]
+[2K/release_notes        (Status: 200) [Size: 1086]
+[2K/http%3A%2F%2Fwww     (Status: 400) [Size: 435]
+[2K/show_image           (Status: 400) [Size: 194]
+[2K/http%3A%2F%2Fyoutube (Status: 400) [Size: 435]
+[2K/http%3A%2F%2Fblogs   (Status: 400) [Size: 435]
+[2K/http%3A%2F%2Fblog    (Status: 400) [Size: 435]
+[2K/**http%3A%2F%2Fwww   (Status: 400) [Size: 435]
+
+===============================================================
+2023/05/27 18:39:12 Finished
+===============================================================
