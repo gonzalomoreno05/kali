@@ -1,1 +1,11 @@
-Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-27 10:50 CEST
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 20:41 CEST
+Nmap scan report for 10.10.11.194
+Host is up (0.074s latency).
+Not shown: 65531 closed tcp ports (reset)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+4222/tcp open  vrml-multi-use
+9091/tcp open  xmltec-xmlmail
+
+Nmap done: 1 IP address (1 host up) scanned in 19.16 seconds

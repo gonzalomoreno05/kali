@@ -1,0 +1,21 @@
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://stocker.htb:80/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/05/30 18:56:17 Starting gobuster in directory enumeration mode
+===============================================================
+[2K/img                  (Status: 301) [Size: 178] [--> http://stocker.htb/img/]
+
+[!] Keyboard interrupt detected, terminating.
+
+===============================================================
+2023/05/30 18:56:19 Finished
+===============================================================
