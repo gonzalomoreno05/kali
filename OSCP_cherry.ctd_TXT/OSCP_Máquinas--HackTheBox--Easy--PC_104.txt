@@ -1,0 +1,54 @@
+#### PC
+PC
+
+Hacemos un escaneo de puertos sin descubrimiento de hosts en todos los puertos y vemos que está abierto el puerto 22 de ssh y el puerto 50051 que tiene un servicio desconocido.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo nmap -p- -Pn <ip>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+Ahora podemos hacer un escaneo más exhaustivo en esos dos puertos encontrados
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo nmap -p 22,50051 -sC -sV <ip>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Seguimos sin obtener mucha información
+
+
+
+Si buscámos en internet, vemos que el puerto 50051 está asociado al servicio gRPC, un servicio open source de alto rendimiento de Remote Procedure Call (RPC) que permite conectar servicios.
+
+Una vez averiguado esto, podemos buscar en github la existencia de herramientas que permitan interaccionar con este servicio, donde encontramos en la siguiente url un GUI que nos permite realizarlo a través del navegador. Para ello elegimos la herramienta grpcui y nos vamos al paquete tar.gz de nuestra distribución para la última release publicada.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./grpcui -plaintext 10.10.11.214:50051
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+Tras acceder a la herramienta web podemos apreciar dos cosas. En primer lugar, podemos registrar un nuevo usuario en el sistema, dandonos acceso posterior como un usuario normal.
+
+
+En segundo lugar, podemos probar a loguearnos con usuarios por defecto, como admin:admin, lo cual no nos da acceso, pero si nos notifica que el id del usuario administrador, y del token de acceso, con lo que podemos ir a la opción getinfo para ver si esto nos permite obtener más información.
+
+
+
+Si realizamos una petición de información para el usuario administrador (id 315) y le añadimos como campo el token que hemos obtenido:
+
+
+
+Previamente, interceptamos la petición con burpsuite y la mandamos a el repetidor.
+
+
+

@@ -1,0 +1,7 @@
+### Security Headers Scanner
+Security Headers Scanner
+
+Analiza cabeceras de respuestas HTTP y proporciona un análisis básico de la situación de seguridad del objetivo.
+
+https://securityheaders.com/
+

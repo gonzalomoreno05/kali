@@ -1,0 +1,18 @@
+### Shodan
+Shodan
+
+Search engine that crawls devices connected to the Internet including but not limited to the World Wide Web. This includes the servers that run websites but also devices like routersand IoT devices.
+
+https://www.shodan.io/
+
+• hostname:<domain_name> → Filtrar por nombre de dominio
+• port:<n> → Filtrar por puerto/servicio
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+hostname:megacorpone.com port:22			# Concatenando varios filtros
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+
+Pulsando en una de las IPs se nos muestra un informe en el que podemos ver información de puertos, servicio y tecnologías utilizadas por el servidor en esa página, además de si existen vulnerabilidades publicadas para los servicios identificados.
+
+

@@ -1,0 +1,32 @@
+### Visualización de contenido de ficheros
+Visualización de contenido de ficheros
+• cut → Elimina secciones de cada línea de un fichero
+   ◇ -d ‘’ → Delimitador 
+   ◇ -f <n> → Selecciona la ‘n’ aparición del delimitador y muestra todo el contenido existente entre la aparición previa y la seleccionada
+   
+• sort → Ordena líneas de un fichero
+   ◇ -u, --unique → Muestra el resultado sin duplicados
+   ◇ -r, --reverse → Ordena inversamente
+   ◇ -n, --numeric-sort → Compara valores numéricos
+  
+• uniq → Omite líneas repetidas
+   ◇ -c → Añade un prefijo a cada línea con el número de apariciones 
+
+• grep ‘regexp’ → Busca texto en ficheros o salida de comandos
+   ◇ -v → Invertido, selecciona las líneas que no hagan match
+   ◇ -o → Solo devuelve el string indicado en la expresión regular
+
+• sed ‘regexp’ → Edita el texto introducido
+   ◇ s/hard/harder/g → sustituye la palabra 'hard' por 'harder', /g reemplaza todas las apariciones en lugar de solo la primera
+
+• awk → Procesado de texto
+   ◇ -F ‘:’ → Separador, separa por el texto especificado, en este caso :
+   ◇ ‘{print $1, $3}’ → printea solo el primer y tercer grupo de palabras delimitado por el separador anterior.
+   ☑ awk -F “:” ‘{print “The user ” $1 “  home directory is ” $6}’ /etc/passwd → Muestra el texto especificado introduciendo el recorte de las palabras delimitadas por el texto : del fichero /etc/passwd
+
+• head <file> → Muestra las 10 primeras líneas de un fichero
+
+• wc -l <file> → Muestra el número total de líneas que contiene un fichero
+
+• 
+

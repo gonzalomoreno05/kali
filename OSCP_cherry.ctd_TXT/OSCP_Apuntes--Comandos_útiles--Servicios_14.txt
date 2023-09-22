@@ -1,0 +1,12 @@
+### Servicios
+Servicios
+• systemctl <orden> <servicio>→ Maneja servicios
+   ◇ start → Inicia servicio
+   ◇ status → Muestra estado del servicio
+   ◇ restart → Reinicia servicio
+   ◇ stop → Detiene servicio
+   ◇ enable → Habilita servicio al inicio del sistema
+   ◇ list-unit-files → Muestra tabla de todos los servicios disponibles
+   
+
+

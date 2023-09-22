@@ -1,0 +1,9 @@
+#### CozyHosting
+
+Ejecutamos un análisis de puertos en el que podemos observar que existen dos puertos abiertos, el puerto 22 correspondiente a SSH po
+
+sudo nmap -sC -sV -O 10.10.11.230 > nmap.txt
+
+
+
+

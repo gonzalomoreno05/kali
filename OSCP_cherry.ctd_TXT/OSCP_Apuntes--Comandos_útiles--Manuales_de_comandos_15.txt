@@ -1,0 +1,9 @@
+### Manuales de comandos
+
+ Manuales de comandos
+•   man <command> → Muestra el manual de usuario de un comando
+   ◇ -k <keyword>→ keyword search
+
+• apropos <keyword> → Busca una lista de manuales en base a una palabra clave proporcionada, útil si no sabes que comandos existen para realiar determinada tarea. Es lo mismo que man -k
+
+

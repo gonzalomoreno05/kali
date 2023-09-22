@@ -1,0 +1,14 @@
+### Social Media Tools
+Social Media Tools
+
+• Social-Searcher → Motor de búsqueda de páginas de redes sociales.
+https://www.social-searcher.com
+
+
+1. Site Specific Tools
+
+• twofi → Escanea el feed de Twitter de un usuario y genera una wordlist personalizada para ataques de contraseña contra ese usuario. Requiere una API Key de Twitter.
+• linkedin2username → Script que genera listas de usuario basadas en datos de Linkedin.
+
+
+

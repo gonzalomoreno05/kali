@@ -1,0 +1,20 @@
+## Web
+• ffuzz (ffuf)  → Herramienta de fuzzing. Es muy agresiva, poner con pocos hilos y modificada para que sea sigilosa, si no puede tirar los servidores. Se puede configurar de manera agresica para intentar tirar un servidor.
+• Web 0day.today → sSitio web relacionado con información sobre vulnerabilidades de día cero (0-day) en software y sistemas.
+• Web Sploitus → Motor de búsqueda que utiliza la API de Vulners para buscar exploits y herramientas relacionadas
+• WAFWOOF → Herramienta que se utiliza para identificar y reconocer productos de Firewall de Aplicaciones Web (sudo apt install wafw00f) 
+• pagodo →  Script relacionado con la recopilación de información de Google Dorks
+• shodan → Motor de búsqueda especializado en dispositivos conectados a Internet
+• intelX →  Plataforma que ofrece herramientas de inteligencia de código abierto (Open Source Intelligence, OSINT) y forenses para investigaciones
+• spiderfoot → Software de inteligencia de fuentes abiertas (OSINT) que proporciona una amplia gama de herramientas para recopilar y analizar información
+• Web cirt.net → Web para contraseñas por defecto
+• proxychains4 → Herramienta que permite enrutar el tráfico de red a través de proxies o servidores intermedios. Esta herramienta se utiliza para ocultar la identidad y la ubicación del usuario al acceder a Internet.
+• PassGAN →  Técnica de inteligencia artificial (IA) utilizada para descifrar contraseñas sin intervención humana, con el objetivo de mejorar la seguridad en línea. Esta técnica se basa en el uso de redes generativas adversariales (GAN, por sus siglas en inglés) para generar contraseñas similares a las utilizadas por los usuarios y así descifrarlas.
+• crackmapexec → Herramienta utilizada en pentesting (pruebas de penetración) y en entornos de Windows/Active Directory para enumerar y explotar debilidades en la seguridad
+• Web Red Team Notes → Página web de cheetsheets de pentesting
+• Pentester Promiscuous Notebook - Low-Hnaging fruits → Página web de cheetsheets de pentesting
+• o365spray  →  User enumeration and password spraying → hay una consulta en el validator que poniendola en el buscardor (curl) te muestra si el dominio existe o no para office365...
+• censys → Motor de búsqueda y una plataforma de descubrimiento de activos en Internet. Se enfoca en proporcionar información detallada y exhaustiva sobre los dispositivos y servicios en línea a través de la exploración y el análisis de datos de Internet.
+• reNgine → Framework de reconocimiento automatizado de aplicaciones web
+
+

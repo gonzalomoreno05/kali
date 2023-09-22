@@ -1,0 +1,13 @@
+### Information Gathering Frameworks
+Information Gathering Frameworks
+
+1. OSINT Framework
+
+Inlcuye herramientas y páginas web de recopilación de información en una sola locaclización
+
+https://osintframework.com/
+
+2. Maltego
+
+Very powerful data mining tool that offers an endless combination of search tools and strategies
+

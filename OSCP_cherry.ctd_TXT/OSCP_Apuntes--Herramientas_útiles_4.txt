@@ -1,0 +1,19 @@
+## Herramientas útiles
+• batcat → cat gráficamente mejor ( está asociado al alias ‘cat’ para su uso)
+
+• xclip → para manipular el portapapeles desde la terminal (apt install xclip)
+
+• whatweb → Escáner de tecnologías Web
+
+• searchsploit → Búsqueda offline de vulnerabilidades 
+   ◇ -u → Actualiza la base de datos
+   ◇ -w → Devuelve la url del exploit en https://www.exploit-db.com en lugar de la ruta local
+   ◇ -t → Busca el título del exploit
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+apt install exploitdb
+searchsploit -u 		# Actualiza la base de datos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+

@@ -1,0 +1,11 @@
+### Usuarios
+Usuarios
+
+• passwd → Cambia la contraseña del propio usuario
+
+• adduser → Crea un nuevo usuario
+
+• deluser → Borra un usuario
+
+• w → Lista todos los usuarios logueados
+

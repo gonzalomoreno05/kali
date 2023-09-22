@@ -1,0 +1,16 @@
+### Descargas
+Descargas de ficheros
+
+• wget <url> → Descarga ficheros utilizando protocolos HTTP/HTTPS y FTP
+   ◇ -O <nombre_fichero> → Darle un nombre diferente al fichero de salida descargado
+
+• curl <url> → Transfiere datos de o a un servidor utilizando protocolos IMAP/S, POP3/S, SCP, SFTP, SMB/S, SMTP/S, TELNET, TFTP, etc. 
+   ◇ -o <nombre_fichero> → Darle un nombre diferente al fichero de salida descargado
+
+• axel <url> → Acelerador de descargas que transfiere un fichero de un servidor  FTP o HTTP a través de múltiples conexiones.
+   ◇ -n X→ Especifíca el número X de conexiones múltiples a utilizar
+   ◇ -a → Indicador de progreso mas conciso
+   ◇ -o → Especifía un nombre diferente del fichero a descargar
+
+
+

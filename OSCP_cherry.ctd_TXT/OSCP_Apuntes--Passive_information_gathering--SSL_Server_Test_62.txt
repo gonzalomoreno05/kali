@@ -1,0 +1,9 @@
+### SSL Server Test
+SSL Server Test
+
+Esta herramienta analiza la configuración SSL/TLS de un servidor y la compara con las actuales mejores prácticas. También identifica algunas vulnerabilidades SSL/TLS como Poodle o Heartbleed.
+
+https://www.ssllabs.com/ssltest/
+
+
+

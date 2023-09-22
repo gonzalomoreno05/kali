@@ -1,0 +1,93 @@
+#### Inject
+Inject
+
+
+
+Tras el primer escaneo observamos que tiene los puertos 22 del servicio SSH y el 8080 que es un servicio HTTP abiertos.
+
+Si vamos al navegador vemos que en el puerto 8080 hay alojada una página web que podemos analizar con burpsuite, en esta página parece haber un enlace a una página de login y a otra de registro que podemos explotar.
+
+
+
+
+
+
+También parece tener una página para subir ficheros que podemos utilizar para subir una reverse shell con php.
+
+
+
+al subir el reverse shell, se nos devuelve un mensaje diciendo que solo se aceptan ficheros de imagen.
+
+También podemos detectar este directorio con gobuster como se puede apreciar en la siguiente imagen.
+
+
+
+No se puede subir una reverse shell, pero la dirección /show_image nos permite ver la imágen que hemos subido, por lo que podemos probar si nos muestra maás ficheros del sistema como por ejemplo /etc/passwd, y vemos que conseguimos realizar un directory traversal en la web.
+
+
+
+Con esto, encontramos dos usuarios del sistema, frank y phil. Pero si podemos ver este fichero, significa que podemos ver otros ficheros también, como el user.txt que contiene el user flag.
+
+Con frank recibimos  un mensaje de error, pero con phil nos devuelve una imágen que podemos visualizar en el navegador.
+
+
+
+El problema es que no nos muestra el contenido del fichero. Esto probablemente se deba a que el usuario de la página web con el que se está realizando el directory traversal no tenga permisos para abrir este directorio, pero probablemente si los tenga para el directorio /var/www en el que se alojan las página web habitualmente.
+
+Dentro de este directorio encontramos dos directorios, html, el cuál no muestra nada, y WebApp, que muestra el contenido que se ve en la respuesta siguiente.
+
+
+Vemos que hay un fichero pom.xml, el cual si abrimos vemos que la aplicación web utiliza el framework de spring, por lo que vamos a buscar vulnerabilidades en este framework
+
+
+
+Si buscamos vulnerabilidades de spring para la versión 2.6.5 que permitan la ejecución de código, encontramos la vulnerabilidad CVE-2022-22963 Remote Code Execution. Si la buscamos en github encontramos varias opciones, una de ellas proporciona un script que te permite ejecutar una reverse shell.
+https://github.com/J0ey17/CVE-2022-22963_Reverse-Shell-Exploit
+
+Nos descargamos el repostorio en nuestro sistema y ejecutamos el script de python exploit.py, el cual nos pregunta por nuestra IP y ejecuta la reverse shell en el puerto 4444.
+
+
+
+Vemos que hemos accedido como el usuario frank. Pero el usuario frank no tiene el glaf de usuario, sino que lo tiene phil, y no tiene permisos para verlo tampoco.
+
+
+
+Si revisamos el directorio home de frank, vemos un directorio .m2 que contiene un fichero xml con las credenciales del usuario phil:DocPhillovestoInject123
+
+
+
+Si nos cambiamos de usuario con el comando su e introducimos la contraseña obtenida, podemos acceder a la flag de usuario del sistema. bd6e826c5a7b0b088daf6626cc07437b
+
+Listamos ahora el contenido del home del usuario phil.
+
+
+
+Ejecutamos el siguiente código de python para conseguir una shell funcional en el equipo: python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+Subimos el script pspy para analizar procesos en linux a un servidor web y nos los descargamos en la maquina objetivo. tras ejecutarlo, vemos que se ejecuta ansible-parallel lo que ejecuta todos los ficheros yaml que encuentra y que el fichero yaml que ejecuta se encuentra en la siguiente ruta.
+
+
+
+Creamos un playbook con el siguiente codigo para otorge suid al /bin/bash
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- hosts: localhost
+  tasks:
+    - name: Escala privilegios
+      ansible.builtin.shell: |
+        chmod +s /bin/bash
+      become: true
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Una vez colocado en la carpeta tasks solo hay que esperar a que se ejecute.
+
+
+
+ejecutamos “bash -p” y ya somos root
+
+el flag es: cbdfff37c8b6b9d85079c15e0cec7be9
+
+

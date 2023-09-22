@@ -1,0 +1,9 @@
+### Historial
+Historial
+
+• history → Muestra el historial de comandos introducidos en el terminal
+
+• !<n> → Ejecuta el comando numero ‘n’ de la lista del historial
+
+• !! → Ejecuta el último comando introducido 
+

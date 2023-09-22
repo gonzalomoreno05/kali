@@ -1,0 +1,21 @@
+### Edición de ficheros
+Edición de ficheros
+
+• nano <file> 
+   ◇ Ctrl+O → Guardar cambios
+   ◇ Ctrl+K → Borrar línea
+   ◇ Ctrl+U → Pegar una línea cortada en la posición del cursor
+   ◇ Ctrl+W → Buscar 
+   ◇ Ctrl+X → Salit
+
+
+• vi <file> 
+   ◇ ESC → Modo comandos
+      ▪ dd → Borra línea actual
+      ▪ yy → Copia línea actual
+      ▪ p → Pega el contenido del portapapeles
+      ▪ x → Borra el carácter actual
+      ▪ :w → Guarda el fichero
+      ▪ :q! → Sale sin guardar
+      ▪ :wq → Guarda el fichero y sale
+

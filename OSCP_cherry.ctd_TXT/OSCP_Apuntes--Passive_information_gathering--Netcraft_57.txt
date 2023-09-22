@@ -1,0 +1,13 @@
+### Netcraft
+Netcraft
+
+https://www.netcraft.com
+
+• DNS search → Recopila información sobre el dominio especificado. Por cada servidor encontrado, se puede ver un ‘site report’ que proporciona información adicional e historial sobre el servidor
+   ◇ https://searchdns.netcraft.com/
+   
+   
+   
+   
+   
+

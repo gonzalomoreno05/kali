@@ -1,0 +1,12 @@
+### Piping and Redirection
+Redirection
+
+• <comando> > <fichero> → Guarda la salida del comando en el fichero, sustituyendo el contenido original del fichero
+• <comando> >> <fichero> → Guarda la salida del comando en el fichero, añadiendola al final del contenido original
+• <comando> < <fichero> → Manda el contenido del fichero como entrada del comando
+• <comando> 2> <fichero> → Manda la salida de error del comando a un fichero
+
+Piping
+
+• <comando_1> | <comando_2> → Redirige la salida del primer comando al segundo comando
+

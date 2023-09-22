@@ -1,0 +1,24 @@
+## ICS
+Tipos de dispositivos
+
+• PLC → 
+• RTU →
+• DCS (Controlador de proceso distribuido) →
+• SCADA (Supervisory Control and Data Acquisition) → Se utilizan para supervisar y controlar procesos industriales y de infraestructura crítica. Suelen ser el punto de entrada para los ataques
+• Sistema de seguridad y control de acceso → Sistemas que se utilizan para controlar el acceso a edificios
+• HVAC → Es como un SCADA pero para temas como temperatura, humedad...
+
+Protocolos usados
+
+• Modbus TCP ( de los más importantes)
+• DNP3
+• OPC
+• S7comm ** ( de los más importantes) Existe una vulnerabilidad muy grande que se desconoce aún
+• EtherNet/IP
+
+
+Siempre probar lo primero las credenciales por defecto en cada dispositivo.
+
+• routersploit → Metasploit pero para routers y dispositivos
+• ICSsploit → Metasploit pero para ICS (https://github.com/tijldeneut/icssploit)
+

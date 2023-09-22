@@ -1,0 +1,64 @@
+### Variables
+Variables
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+variable=Hacker				# Definimos una variable de nombre 'variable' y de contenido 'Hacker'
+var2='Hello World'			# Si el string tiene espacios se debe poner entre comillas
+
+echo $variable				# Imprimimos el contenido de la variable 'variable' llamandola con el carácter $ 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• ‘’  → Bash interpreta el contenido de manera literal
+   ◇ <var>=‘<comando>’ → Asigna la salida de un comando a una variable
+• “” → Bash interpreta el contenido de manera literal, menos $, ' y \
+   ◇ $ → Se utiliza para llamar a una variable dentro de las comillas (var3="hola $var2") o para asignar a una variable el resultado de un comando (user=$(whoami))
+
+
+Argumentos
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+
+echo "The first two arguments are $1 and $2"
+--------------------------------------------------------
+chmod +x ./arg.sh
+./arg.sh hello world
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Leer entrada de usuario
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+echo "Responde si o no:"
+
+read answer
+echo "Tu respuesta es $answer"
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Se pueden utilizar opciones adicionales del comando read:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+# Prompt the user for credentials
+read -p 'Username: ' username
+read -sp 'Password: ' password
+
+echo "Thanks, your creds are as follows: " $username " and " $password
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• read <var> → Espera a que el usuario escriba en el terminal y lo guarda como variable
+   ◇ -p ‘<prompt>’ → Imprime en el terminal para aclarar que se debe introducir
+   ◇ -s → Hace que no se vea lo que escribe el usuario por la terminal. Útil en la introducción de contraseñas
+

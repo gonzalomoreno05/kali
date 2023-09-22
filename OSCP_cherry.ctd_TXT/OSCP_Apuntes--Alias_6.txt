@@ -1,0 +1,9 @@
+## Alias
+
+• l → lsd --group-dirs=first
+    ◇ la → lsd -a --group-dirs=first
+   ◇ lla → lsd -lha --group-dirs=first
+   ◇ ls → lsd --group-dirs=first
+   ◇ ll → lsd -lh --group-dirs=first
+• cat → batcat
+

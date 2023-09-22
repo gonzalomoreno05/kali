@@ -1,0 +1,8 @@
+### Creación de archivos y directorios
+Creación de archivos y directorios
+• mkdir → Crea directorios
+   ◇ -p <directorio> → crea varios directorios a la vez
+      ▪ test/{recon,exploit,report} → Crea un directorio test, y dentro de el 3 directorios 
+  
+
+

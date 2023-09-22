@@ -1,0 +1,15 @@
+### Tcpdump
+Tcpdump
+
+Captura tráfico y analiza paquetes 
+
+• tcpdump
+   ◇ -r <file> → Lee paquetes del fichero especificado
+   ◇ -n  → Sin resolución DNS
+   ◇ src host <ip> → Filtrar por host origen
+   ◇ dst host <ip> → Filtrar por host destino
+   ◇ port <n> → Filtrar por puerto
+   ◇ -X → Imprime los datos de paquete en Hexadecimal y ASCII
+   ◇ ‘tcp[13] = 24’ → Solo paquetes con los bits de ACY y PSH activados (paquetes de datos)  que se representa con 00011000 en binario o 24 con decimal
+   ◇ -A → Imprime cada paquete en ASCII
+

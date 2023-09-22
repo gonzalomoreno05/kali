@@ -1,0 +1,10 @@
+### Wireshark
+Wireshark
+
+Filtros
+
+net 192.168.121.0/24 → Fitra paquetes de una subred
+
+tcp.port == 21 → Muestra datos FTP (Tráfico TCP en el puerto 21)
+   ◇ 	follow → TCP stream →→ para ver facilmente la interacción FTP
+

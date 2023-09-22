@@ -1,0 +1,24 @@
+### Variables de entorno
+Variables de entorno
+• $PATH → Rutas de directorios que Bash buscará cuando un comando es ejecutado sin su ruta completa
+   ◇ /usr/local/sbin
+   ◇ /usr/local/bin
+   ◇ /usr/sbin
+   ◇ /usr/bin
+   ◇ /sbin:
+   ◇ /bin
+
+• $USER → Nombre de usuario del terminal
+
+• $PWD → Directorio actual
+
+• $HOME → Directorio home del usuario
+
+Operaciones con variables de entorno
+• echo <variable de entorno> → Muestra el contenido de la variable de entorno 
+
+• export <nombre_variable>=<contenido> → Definición de nueva variable de entorno
+
+• env → Muestra todas las variables de entorno existentes
+ 
+

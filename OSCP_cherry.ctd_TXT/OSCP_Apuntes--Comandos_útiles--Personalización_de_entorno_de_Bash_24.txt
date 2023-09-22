@@ -1,0 +1,18 @@
+### Personalización de entorno de Bash
+Personalización de entorno de Bash
+
+• export HISTCONTROL=ignoredups → Hace que el historial ignore duplicados
+
+• export HISTIGNORE="&:ls:[bf]g:exit:history" →  Hace que el historial omita comandos los comunes especificados
+
+• export HISTTIMEFORMAT='%F %T '  → Cambia el formato de fecha en el historial
+
+•  alias <name>=<comando> → Crea un alias de un nuevo comando
+
+• unalias <name> → Elimina un alias
+
+Ficheros de configuración del bash
+
+• ~/bashrc → Fichero de configuración de Bash
+• ~/zshrc → Fichero e configuración de Zsh ( Este es el que tenemos por defecto)
+

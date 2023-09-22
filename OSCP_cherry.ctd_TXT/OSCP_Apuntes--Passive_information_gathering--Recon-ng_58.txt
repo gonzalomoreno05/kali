@@ -1,0 +1,22 @@
+### Recon-ng
+Recon-ng
+
+Framework basado en módulos para recopilación de información basada en web. Muestra los resultados en el terminal, pero también los guarda en una base de datos.
+
+• recon-ng → Lanza el programa basado en terminal, similar a Metasploit
+   ◇ marketplace search <keyword>  → Busca módulos en marketplace por palabra clave. Los modulos marcados con un asterisco en el campo ‘K’ indican que requieren credenciales o API keys de proveedores ajenos (Algunos requieren subscripción).
+   ◇ marketplace info <module_path> → Muestra información sobre un módulo
+   ◇ marketplace install <module_path> → Instala un módulo
+   ◇ modules load <module_path> → Carga un módulo
+   ◇ info → Muestra detalles sobre el módulo cargado
+   ◇ options set <CAMPO> <valor> → Asigna un valor a un campo. Algunos son obligatorios y otros opcionales dentro de un módulo
+   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+options set SOURCE megacorpone.com			# Definimos el target
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ◇ run  → Ejecuta el módulo cargado
+   ◇ back → Va hacia atrás
+   ◇ show → Muestra las diferentes opciones que se puede elegir para mostrar
+      ▪ show hosts → Muestra los hosts descubiertos en la fase anterior y guardados en la BBDD
+

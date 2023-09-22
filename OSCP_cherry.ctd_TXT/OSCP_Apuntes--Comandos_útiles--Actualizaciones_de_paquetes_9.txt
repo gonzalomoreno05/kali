@@ -1,0 +1,19 @@
+### Actualizaciones de paquetes
+ Actualizaciones y busquedas de paquetes
+•  apt update → Actualiza la lista de paquetes que se pueden actualizar
+
+• apt upgrade → Actualiza todos los paquetes que esten disponibles, o uno específico si se introduce como parámetro.
+
+• apt-cache search <keyword> → Busca el texto indicado en la descripción de cada paquete contenido en el repositorio de kali.
+
+• apt show <keyword> → Muestra la descripción de un determinado paquete del respositorio de kali
+
+• apt install <paquete> → Instala un determiando paquete
+
+• apt remove --purge <paquete> → Elimina completamente un paquete del sistema. (Si no se utiliza --purge, se quedan ficheros de configuración)
+
+•  dpkg → Manejo de paquetes offline con archivos .deb
+   ◇ -i, --install  <paquete.deb> → Instala paquete
+   ◇ -r, --remove <paquete.deb> → Elimina paquete
+   ◇ -P, --purge <paquete.deb> → Elimina paquete completamente
+

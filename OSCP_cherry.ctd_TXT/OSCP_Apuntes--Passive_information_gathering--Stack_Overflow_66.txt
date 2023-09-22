@@ -1,0 +1,5 @@
+### Stack Overflow
+Stack Overflow
+
+Se puede sacar información sobre que tecnologías se utilizan en una empresa si se localiza a un empleado en este foro haciendo preguntas específicas sobre una tecnología concreta, o sobre vulnerabilidades.
+

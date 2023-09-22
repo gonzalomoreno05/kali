@@ -1,0 +1,13 @@
+## Apuntes
+Reconocimiento
+
+• PING → Si el TTL del ping es 64  es un Linux, si es  128 se trata de un Windows
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ping -c 1 <ip>
+# TTL < 64 → Linux + máquina intermedia
+# Se puede comprobar con el comando:
+ping -c 1 <ip> -R 		# traceroute 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

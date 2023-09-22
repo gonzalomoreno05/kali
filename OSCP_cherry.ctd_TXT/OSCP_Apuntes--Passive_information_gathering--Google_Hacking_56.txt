@@ -1,0 +1,37 @@
+### Google Hacking
+Google Hacking
+
+• site:<domain_name> → Limita la búsqueda a un solo dominio
+   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+site:megacorpone.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+• filetype:<type> → Limita la búsqueda a un tipo determinado de fichero
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+site:megacorpone.com filetype:php
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+• ext:<programming_language> → Identifica que lenguage de programación se ha utilizado en una página web.
+   ◇ jsp → Java Server Pages
+   ◇ cfm → Coldfusion
+   ◇ pl → Perl 
+
+• -<operator> → Exlusión
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+site:megacorpone.com -filetype:html				# Todas las búsquedas del dominio megacorpone.com excluyendo las páginas html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• intitle: “<text1>” “<text2>” → Busca páginas que contengan ‘text1’ en el título y ‘text2’ en la página.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+intitle:"index of" "parent directory"			# Útil para encontrar listas de directorios que listan los contenido de los directorios sin páginas de índice.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• GHDB (Google Hacking DataBase) → Contiene múltiples búsquedas creativas que se pueden realizar.
+   ◇ https://www.exploit-db.com/google-hacking-database
+

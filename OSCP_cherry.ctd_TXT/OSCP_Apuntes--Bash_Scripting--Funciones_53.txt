@@ -1,0 +1,47 @@
+### Funciones
+Funciones
+
+Existen 2 formatos diferentes para definir funciones
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function function_name {
+commands...
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function_name () {
+commands...
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+# function return value example
+return_me() {
+ echo "Oh hello there, I'm returning a random value!"
+ return $RANDOM
+}
+return_me
+echo "The previous function returned a value of $?"	 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+					 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+# var scope example
+name1="John"
+name2="Jason"
+name_change() {
+ local name1="Edward"				# Variable local
+ echo "Inside of this function, name1 is $name1 and name2 is $name2"
+ name2="Lucas"
+}
+echo "Before the function call, name1 is $name1 and name2 is $name2"
+name_change
+echo "After the function call, name1 is $name1 and name2 is $name2"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

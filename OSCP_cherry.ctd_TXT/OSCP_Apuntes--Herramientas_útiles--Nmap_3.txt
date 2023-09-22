@@ -1,0 +1,39 @@
+### Nmap
+Técnicas de análisis
+-sS → Análisis TCP SYN
+-sT → Análisis TCP Connect
+-sA → Análisis TCP ACK
+-sO → Análisis de protocolo IP
+
+Descubrimiento de hosts
+-n → Sin resolución DNS
+-sL → Sondeo de lista, solo lista los objetivos a analizar
+-sP → Sondeo Ping, solo muestra si el objetivo está vivo
+
+Detección de Servicio/Versión
+-sV → Sondear puertos abiertos para obtener información del servicio/version
+
+Detección de Sistema Operativo
+-O → Activar detección del Sistema Operativo
+
+SCRIPTS
+-sC (--script=default)→ Ejecución de scripts básicos de reconocimiento
+
+Puertos
+-p- → Todos los puertos
+--open → Solo puertos abiertos
+-p<n>,<m> → Solo puertos n y m
+
+
+Visualización
+-v → Verbose
+
+Rendimiento y Temporizado
+-T[0-5] → Velocidad mínima 0, Velocidad máxima 5
+Modos de exportación
+
+-oG → formato grepeable (para poder usar grep)
+-oA → allFormats (xml,grep,nmap)
+-oX → Xml ( útil para usar XSLTPROC y pasar a HTML)
+-oN → formato Nmap
+

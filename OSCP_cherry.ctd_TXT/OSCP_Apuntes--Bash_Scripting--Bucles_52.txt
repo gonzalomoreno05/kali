@@ -1,0 +1,50 @@
+### Bucles
+Bucles
+
+1. Bucles For
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for var-name in <list>
+do
+ <action to perform>
+done
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• seq <n> <m> → Secuencia de números de 'n' a 'm'
+• {<n>..<m>} → Equivalente a seq
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for ip in $(seq 1 10); do echo 10.11.1.$ip; done			# Ejemplo de uso
+for i in {1..10}; do echo 10.11.1.$i;done					# Ejemplo equivalente
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+2. Bucles While
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+while [ <some test> ]
+do
+ <perform an action>
+done
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Un ejemplo de uso sería el siguiente:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+# while loop example
+counter=1
+while [ $counter -le 10 ]
+do
+ echo "10.11.1.$counter"
+ ((counter++))
+done
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

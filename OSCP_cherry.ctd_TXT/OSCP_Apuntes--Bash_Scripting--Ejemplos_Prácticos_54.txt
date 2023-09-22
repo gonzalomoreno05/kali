@@ -1,0 +1,29 @@
+### Ejemplos Prácticos
+Ejemplos prácticos
+
+1. Ejemplo 1
+
+Vamos a transformar este comando para obtener subdominios de un html en un código de bash:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+grep "href=" index.html | grep "\.megacorpone" | grep -v "www\.megacorpone\.com" | awk -F "http://" '{print $2}' | cut -d "/" -f 1
+----------------------------------------------------------------------------------------------------------------------------------
+grep -o '[^/]*\.megacorpone\.com' index.html | sort -u > list.txt					# Esto es un comando equivalente
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+El siguiente paso es encontrar las direcciones IP de estos dominios con el comando host
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for url in $(cat list.txt); do host $url; done | grep "has address" | cut -d " " -f 4 | sort -u
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+2. Ejemplo 2
+
+
+
+3. Ejemplo 3 
+

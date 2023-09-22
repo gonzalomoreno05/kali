@@ -1,0 +1,12 @@
+### sqlmap
+sqlmap
+
+
+• sqlmap → Para automatizar consultas sql
+   ◇ -u <url> (--url) →  Url objetivo
+   ◇ --cookie="<cookie_name>=<cookie_value>" → Para dar valores a cookies, muy útil cuando hemos conseguido acceso a una web y tenemos cookie de inicio de sesión.
+   ◇ --forms → Busca y prueba todos los formularios de la página web
+   ◇ --batch → Usa el valor por defecto de la respuesta, en lugar de preguntar al usuario que introzca una opción
+   ◇ --dbs → Enumera bases de datos DBMS
+   ◇ --os-shell → Consigue acceso shell en el sistema que hostea la pagina
+

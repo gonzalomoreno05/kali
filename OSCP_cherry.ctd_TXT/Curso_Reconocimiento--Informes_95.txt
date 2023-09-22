@@ -1,0 +1,20 @@
+## Informes
+Informes
+
+• asana →  Herramienta de gestión de proyectos y tareas que ayuda a los equipos a organizar, colaborar y dar seguimiento a sus proyectos
+
+
+
+https://rhinosecuritylabs.com/penetration-testing/penetration-testing-aws-storage/
+
+https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/wordpress
+
+
+• miranda.py  → Análisis forense de sistemas informáticos
+
+tutorial David Bombal de Scapy
+
+nmap.online
+
+NIAP → Listas de productos certificados por el ccn
+

@@ -1,0 +1,36 @@
+### Manejo de procesos
+Manejo de procesos
+
+Control de trabajos
+• <command> & → Mandar un comando a segundo plano
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<command>		# Ejecuta un comando sin &
+Ctrl+Z			# Suspende el trabajo
+bg				# Manda el comando a segundo plano
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+•  jobs → Lista los trabajos que corren en segundo plano de la sesión de terminal actual
+
+• fg → Devuelve un trabajo a primer plano
+   ◇ %Number → Devuelve el trabajo número ‘Number’ de la lista mostrada por el comando ‘jobs’ a primer plano
+   ◇ %String → Devuelve el trabajo que empieza por el texto especificado a primer plano
+   ◇ %+ OR %% → Devuelve el trabajo actual a primer plano
+   ◇ %- → Devuelve el trabajo anterior a primer plano
+   
+ Control de procesos
+ 
+•  ps → Lista procesos de todo el sistema, no solo de la sesión actual como ‘jobs’. Muy útil una vez has conseguido acceder a un sistema para ver que procesos se encuentran en ejecución.
+   ◇ -e → Selecciona todos los procesos
+   ◇ -f → Lista en formato completo (UID, PID, PPID, etc)
+   ◇ -C <keyword> → Selecciona por nombre del proceso
+   ◇ -H → Árbol de procesos
+   ◇ aux  → ax ejecutados juntos muestran todos los procesos, u lo pone en formato orientado a usuario
+      ▪  a → Lista todos los procesos con terminal (tty).
+      ▪ u → Formato orientado a usuario
+      ▪ x → Lista todos los procesos que pertenecen a tu usuario
+
+• kill <PID> → Mata el proceso que tenga el PID indicado
+• 
+

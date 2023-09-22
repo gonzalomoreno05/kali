@@ -1,0 +1,25 @@
+### DNS Enumeration
+DNS Enumeration
+
+• host <domain_name> → Muestra la dirección IP asociada a un nombre de dominio. Por defecto busca un A record
+   ◇ -t <record_type> → Especifica el tipo de record a mostrar (txt,mx,ptr,a,ns).
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for ip in $(cat wordlist.txt); do host $ip.megacorpone.com;done					# Para resolver todos los posibles nombres de dominio. Forward Lookup Brute Force
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for ip in $(seq 50 100); do host 38.100.193.$ip; done | grep -v "not found"				# Para resolver todos los posibles nombres de dominio. Reverse Lookup Brute Force
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• Wordlist: Seclists → apt install seclists
+
+
+Tools
+
+• DNSRecon
+• DNSEnum
+

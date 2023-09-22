@@ -1,0 +1,18 @@
+### Boolean Logical Operations
+Boolean Logical Operations
+
+• AND → &&
+• OR → ||
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+grep $user2 /etc/passwd && echo "$user2 found!" || echo "$user2 not found!"     	# Ejemplo de uso
+----------------------------------------------------------------------------------------------------
+if [ $USER == 'kali' ] && [ $HOSTNAME == 'kali' ]							# Ejemplo 2
+then
+ echo "Multiple statements are true!"
+----------------------------------------------------------------------------------------------------
+if [ $USER == 'kali' ] || [ $HOSTNAME == 'pwn' ]							# Ejemplo 3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

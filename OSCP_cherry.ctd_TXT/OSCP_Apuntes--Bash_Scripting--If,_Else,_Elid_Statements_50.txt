@@ -1,0 +1,44 @@
+### If, Else, Elid Statements
+If, Else, Elif Statements
+
+1. If
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if [ <some test> ]
+then
+ <perform an action>
+fi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2. Else
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if [ <some test> ]
+then
+ <perform an action>
+else
+ <perform another action>
+fi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+3. Elif
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if [ <some test> ]
+then
+ <perform action>
+elif [ <some test> ]
+then
+ <perform different action>
+else
+ <perform yet another different action>
+fi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+

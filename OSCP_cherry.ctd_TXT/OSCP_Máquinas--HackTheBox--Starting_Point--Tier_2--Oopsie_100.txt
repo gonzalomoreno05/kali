@@ -1,0 +1,167 @@
+##### Oopsie
+Oopsie
+
+1. With what kind of tool can intercept web traffic? → Proxy
+
+
+
+2. What is the path to the directory on the webserver that returns a login page? → /cdn-cgi/login
+
+
+
+Tras ejecutar nmap, vemos que existe un servicio de Apache corriendo en el puerto 80, así que podemos ver que es lo que encontramos en esa ruta.
+
+
+
+También podemos ver una cuenta de correo que vamos a guardar por si fuera necesaria
+
+
+Tras esto vamos a ejecutar dirbuster para encontrar posibles rutas en esta página. → Está opción tarda mucho así que mientras vamos a usar burpusite para ver si encuentra algo mediante navegación manual.
+
+
+
+Tras activar el proxy vemos una página de login que podemos utilizar para entrar.
+
+
+
+3. What can be modified in Firefox to get access to the upload page? → cookie
+
+Tras intentar entrar con contraseñas habituales sin éxito, vemos que la página de login proporciona la opción de acceder como invitado, tras pulsar esta opción navegamos hasta otra sección de la web.
+
+
+
+Si nos vamos a la pestaña account, podemos ver los datos de la cuenta de invitado con la que hemos accedido, cuyo usuario es guest@megacorp.com, la cual es similar a la que encontramos en la pagina principal de admin@megacorp.com.
+
+
+
+También vemos que la pestaña Uploads, que es a la que queremos acceder, nos dice que necesitamos permisos de administrador.
+
+
+
+Si observamos la url de la página accounts, vemos que se indica el nombre de la pestaña en la cookie de “content” y el id de usuario en la cookie “id” así que podemos probar a variar los contenidos de la cookie en la url para ver si nos deja acceder como administrador.
+
+
+
+Si cambiamos el id a “id=1” vemos en la pestaña accounts que nos muestra el usuario administrador.
+
+
+
+
+
+
+Así conseguimos encontrar varios usuarios, pero necesitamos modificar la cookie ya que este usuario tampoco parece tener permisos de administrador. Si inspeccionamos la página, vemos las cookies, que nos muestran el id y el rol del usuario, si cambiamos el id al descubierto de la cuenta administrador (34322) y el rol a “admin” podemos ver si nos da acceso.
+
+
+
+Tras modificar estos campos, ya podemos acceder a la página de subida de archivos.
+
+
+
+Lo que se puede modificar en firefox para tener acceso a la página de uploads es la cookie
+
+
+
+4. What is the access ID of the admin user? → 34322
+
+Esto lo hemos descubierto en la pestaña anterior.
+
+
+
+5. On uploading a file, what directory does that file appear in on the server? → /uploads
+
+
+
+6. What is the file that contains the password that is shared with the robert user? → db.php
+
+Ahora que tenemos acceso a la página de subida de ficheros, podemos probar a subir una reverse shell en php para ver si conseguimos acceso al sistema.
+
+Una vez subido, necesitamos saber la ruta en la que se encuentran los ficheros subidos mediante este método. Para ello, ahora sí, vamos a utilizar gobuster pero con una wordlist algo más pequeña, la 2.3-small y lo guardamos en un fichero de salida.
+
+
+
+Podemos ver el directorio /uploads en el que asumimos que se encuentra el fichero subido.
+
+Nos ponemos a escuchar en el puerto 1234, que hemos configurado en el reverse shell y lo ejecutamos yendo a la ruta en la que se encuentra.
+
+
+
+Y ya tenemos acceso al sistema como www-data
+
+
+Si navegamos a /home vemos el directorio de usuario “robert” y dentro de su escritorio encontramos el flag en user.txt
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Con este comando conseguimos una shell funcional en el sistema mucho mas comoda de manejar
+
+Si buscamos en el directorio que contiene la página web (/var/www/html/cdn-cgi/login) y buscamos por el string “passwd” en todos los ficheros, podemos ver que encontramos una contraseña de administrador.
+
+
+
+Tras probar esta contraseña para el usuario robert mediante el comando su, vemos que no es correcta, por lo que seguimos buscando por los archivos subidos al servidor.
+
+Si leemos el fichero db.php encontramos lo que parece ser otra contraseña para el usuario robert descubierto anteriormente.
+
+
+
+Vemos que esta contraseña si funciona y ya tenemos acceso como usuario robert
+
+
+
+
+
+7. What executible is run with the option “-group bugtracker” to identify all files owned by the bugtracker group? → find
+
+
+
+Vemos que permisos tieene y descubrimos que tiene SETUID
+
+
+
+8. Regardless of which user starts running the bugtracker executable, what's user privileges will use to run? → root
+
+
+
+9. What SUID stands for? → Set owner User ID
+
+
+
+10. What is the name of the executable being called in an insecure manner? → bugtracker
+
+Si ejecutamos bugtracker, vemos que nos pide introducir un identificador de bug, el cual llama a la función cat en la ruta /root/reports/ e introduce el valor de bug introducido.
+
+
+
+Podemos intentar cambiar el cat que se está ejecutando para que ejecute una shell, para ello vamos al directorio /tmp y creamos un fichero cat con permisos de ejecución y que contiene “/bin/sh”, tras esto, exportamos el PATH del directorio /tmp para que busque el comando cat en esa ruta.
+
+Para hacerlo, utilizamos el comando:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo "/bin/bash" > cat
+chmod +x cat
+export PATH=/tmp:$PATH
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Tras ejecutar otra vez bugtracker, ya tenemos consola de root
+
+
+
+11. Submit user flag → f2c74ee8db7983851ab2a96a44eb7981
+
+
+
+12. Submit root flag → af13b0bee69f8a877c3faf667f7beacf
+
+Vemos que robert no tiene permisos de sudo y que es miembro de un grupo llamado bugtracker
+
+ 
+
+
+
+

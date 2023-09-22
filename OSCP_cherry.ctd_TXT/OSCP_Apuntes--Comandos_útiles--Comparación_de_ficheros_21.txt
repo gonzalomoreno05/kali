@@ -1,0 +1,17 @@
+### Comparación de ficheros
+Comparación de ficheros
+
+• comm <file_1> <file_2> → Compara dos ficheros de texto, mostrando las líneas únicas de cada uno y las líneas comunes a ambos. Muestra tres columnas, la primera contiene líneas unicas del primer fichero, las egunda líneas únicas del segundo fichero, y la tercera las líneas comunes a ambos.
+   ◇ -<n> → Se utiliza para suprimir una o varias columnas (valores 1, 2 o 3). Si quieres suprimir las columnas 1 y 2 se utiliza -12
+
+• diff <file_1> <file_2> → Detecta diferencias entre ficheros 
+   ◇ -c → Context format
+   ◇ -u → Unified format
+
+• vimdiff <file_1> <file_2> → Abre vim con múltiples ficheros, cada uno en una ventana. Las diferencias entre ellos son remarcadas
+   ◇ do → Pasa cambios de la otra ventana a la actual
+   ◇ dp → Pone cambios de la ventana actual en la otra
+   ◇ ]c → Salta al siquiente cambio
+   ◇ [c → Salta al cambio anterior
+   ◇ Ctrl+W → Cambia a la otra ventana 
+

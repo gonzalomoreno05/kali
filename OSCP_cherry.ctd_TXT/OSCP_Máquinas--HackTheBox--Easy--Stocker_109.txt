@@ -1,0 +1,99 @@
+#### Stocker
+Stocker
+
+
+
+En primer lugar realizamos un escaneo de puertos y vemos que tiene los puertos 22 de SSH y 80 de HTTP abiertos, por lo que vamos a analizar la web que se encuentra en este último.
+
+
+
+Lo primero que vamos a hacer es revisarla con burpsuite y gobuster, sin embargo no encontramos ninguna ruta que podamos aprovechar.
+
+
+
+Como no hemos encontrado ninguna ruta, vamos a probar si existen subdominios asociados a esta página web que podamos analizar. Para ello utilizamos también gobuster, pero esta vez con la wordlist /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt, utilizamos la opción vhost en lugar de dns y lo configuramos con 50 threads y --append-domain
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gobuster vhost -u stocker.htb --wordlist /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -t 50 --append-domain > gobuster_subdomains.txt
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+Como vemos, se ha encontrado un nuevo subdominio llamado dev.stocker.htb que parece tener una página de login. Procedemos a incluirla en nuestro archivo /etc/hosts y vemos que efectivamente tiene una página de login.
+
+
+
+La primera idea que nos surge es la inyección sql, pero tras utilizar sqlmap, no conseguimos nada con ello.
+
+En segundo lugar, podemos intentar a volver a pasar gobuster para buscar directorios.
+
+
+
+Encontramos un directorio interesante, pero que necesita autenticación, por lo que hay que intentar entrar por otro lado.
+
+Vamos a probar a cambiar el tipo de datos que le introducimos a la página de login, cambiando el Content-type : application/json e introduciendo la siguiente orden en formato json.
+
+{"username":{"$ne":"admin"},"password":{"$ne":"admin"}}
+
+Esta orden nos da acceso si el usuario no es igual a admin y la contraseña no es igual a admin.
+
+
+
+Tras enviarlo, vemos que nos ha dado acceso y podemos entrar a la página /stock
+
+
+Podemos ver que se pueden añadir objetos a la cesta e la compra y luego ver la cesta con los detalles de los productos, esto puede indicar consultas sql en una base de datos, asi que podemos volver  a analizar esta página a ver que obtenemos.
+
+
+
+Vemos que al darle a purchase se genera un pdf cuya ruta tiene el id de la petición. Podemos utilizar la variable title de json para inyectar codigo que nos muestre el archivo /etc/passwd y llamar manualmente a la ruta en la que está el fichero alojado para verlo.
+
+
+
+Vemos que efectivamente podemos ejecutar codigo pero no se ve el contenido asi que vamos a intentar ampliarlo
+
+
+
+Vemos dos usuarios interesantes que tienen directorio /home, el primero es mongodb, lo que nos dice el tipo de base de datos que presenta, el segundo angoose que es el usuario del sistema. Podemos intentar mostrar ahora el flag de este usuario para ver si tenemos acceso. Pero no tenemos acceso. Al ser una página web, probablemente el usuario que estamos utilizando sea el www-data que tiene acceso al directorio /var/www, asi que vamos a probar por ahi
+
+Sabiendo que existe un index.html que muestra la página de inicio de la web, y que ejecuta json, podemos suponer que existe un index.js en la ruta /dev en la cual encontramos la contraseña del usuario mongodb.
+
+
+
+Podemos entrar por SSH
+
+
+flag usario: 87b6a04a724e8f2021f4c2d8c44d9fc1
+
+Podemos copiar nuestra clave publica en el .ssh/authorized_keys de angoose para acceder sin contraseña las siguientes veces
+
+Si ejecutamos en el usuario angoose el comando sudo -l vemos las ordenes que tiene permitido este usuario ejecutar como administrador.
+
+
+
+Vemos que se puede ejecutar node con permisos de administrador en una carpeta específica, pero acepta todo fichero que acabe en .js y empiece por /usr/local/scripts/, por lo que podemos intentar elevar privilegios con un codigo en javascript saltando  a la ruta que queramos.
+
+Creamos un fichero .js que contenga el siguiente codigo para lanzar una shell.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+require ("child_process").spawn("/bin/bash", {stdio: [0, 1, 2]})
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Y conseguimos permisos de root y el flag de root.
+
+
+
+flag root: 67d1ad4875ae494aabb46d9769acead9
+
+
+
+
+
+
+

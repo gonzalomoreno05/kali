@@ -1,0 +1,21 @@
+#### Soccer
+Soccer
+
+Comenzamos realizando un escaneo de puertos sin resolución para ver cuantos hay abiertos.
+
+
+
+Vemos que estan abiertos los puertos 22 del servicio SSH, 80 del HTTP, y los puertos 4222 y 9091 de otros dos servicios que no conocemos por ahora. Vamos a realizar un escaneo ás exhaustivo.
+
+
+
+En primer lugar vamos a investigar los servicios que hay en esos puertos.
+
+
+
+
+
+El siguiente paso va a ser revisar la página web, paar lo que necesitamos añadir a /etc/hosts la ruta y resolución DNS de soccer.htb
+
+
+

@@ -1,0 +1,27 @@
+## Atajos terminator
+ATAJOS TERMINATOR
+
+• Abrir terminal en pestaña nueva→ Control + Shift + T
+• Abrir terminal nueva flotante → Control + Shift + I
+• Moverse entre terminales divididas → Alt + (→↑↓←)
+• Moverse a terminal anterior/siguiente en posición → Control + Shift + (P/N)
+• Moverse a pestaña anterior/siguiente → Control + (Re Pág/Av Pág)
+• Alternar pantalla completa → F11
+• Dividir terminal horizontalmente → Control + Shift + O
+• Dividir terminal verticalmente → Control + Shift + E
+• Cerrar terminal dividida actual → Control + Shift + W
+• Cerrar todas las terminales → Control + Shift + Q
+• Modificar tamaño lateral de terminales divididas → Control + Shift + (→←)
+• Modificar tamaño frontal de terminales divididas → Control + Shift + (↑↓)
+• Edita el título de la pestaña → Ctrl+Alt+A
+• Edita el título del terminal → Ctrl+Alt+X
+• Edita el título de la ventana → Ctrl+Alt+W 
+• Limpiar terminal → Ctrl+Shift + G
+• Ampliar el terminal →  Mayús+Ctrl+Z
+• Maximizar el terminal → Mayús+Ctrl+X
+• Buscar en el historial del terminal →  Mayús+Ctrl+F
+• Mostrar/Ocultar la barra de desplazamiento →  Mayús+Ctrl+S
+• Aumentar/Disminuir tamaño de letra → Control (+/-)
+
+
+

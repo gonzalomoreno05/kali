@@ -1,0 +1,8 @@
+## Passive information gathering
+Passive Information Gathering (OSINT)
+
+Proceso de recopilar información públicamente disponible del objetivo, sin interacción directa con el objetivo.
+
+
+
+

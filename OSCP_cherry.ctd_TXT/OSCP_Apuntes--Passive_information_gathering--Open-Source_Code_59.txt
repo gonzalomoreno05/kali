@@ -1,0 +1,18 @@
+### Open-Source Code
+Open-Source Code
+
+Github, GitLab and Source
+
+• filename:<sting> → Para buscar ficheros que contengan un string en su nombre
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+filename:users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Herramientas para automatizar búsquedas en Github 
+
+• Gitrob →  https://github.com/michenriksen/gitrob        
+• Gitleaks → https://github.com/zricethezav/gitleaks
+• Recon-ng 
+
+

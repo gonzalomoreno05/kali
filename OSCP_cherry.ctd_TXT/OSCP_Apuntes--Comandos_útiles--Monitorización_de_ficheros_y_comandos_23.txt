@@ -1,0 +1,10 @@
+### Monitorización de ficheros y comandos
+Monitorización de ficheros y comandos
+
+• tail → Saca la última parte de ficheros. Útil para monitorizar entradas en ficheros de log según se van escribiendo
+   ◇ -f, --follow → Muestra los datos añadidos según aumenta el fichero
+   ◇ -nX → Muestra las últimas X líneas del fichero
+
+• watch → Ejecuta un comando en periodos regulares ( Por defecto cada 2 segundos)
+   ◇ -n X → Se ejecuta cada X segundos
+

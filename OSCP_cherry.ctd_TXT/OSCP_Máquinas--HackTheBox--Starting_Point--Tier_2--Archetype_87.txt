@@ -1,0 +1,81 @@
+##### Archetype
+Archetype
+
+1. Which TCP port is hosting a database server?        →     1433
+
+
+                                           
+
+2. What is the name of the non-Administrative share available over SMB?    →    backups
+
+• smblient \\\\<ip>\\ → Se conecta por smb a la ip seleccionada, similar al cliente de ftp
+   ◇ -N→ No password
+   ◇ -L→ Muestra que servicios están disponibles en un servidor
+   ◇ ? → Una vez accedido al sistema muestra todos los comandos disponibles
+ 
+
+
+3. What is the password identified in the file on the SMB share?   →    M3g4c0rp123
+
+                                 
+
+Podemos apreciar el usuario y contraseña, los ucales indican que pertenecen a un servidor sql, por lo que podemos utlizar estas credenciales para poder acceder a dicho servidor que se encuentra alojadp en el puerto 1433 descubierto anteriormente.
+
+4. What script from Impacket collection can be used in order to establish an authenticated connection to a Microsoft SQL Server?   →    mssqlclient.py
+
+Impacket is a collection of Python3 classes focused on providing access to network packets. Impacket allows Python3 developers to craft and decode network packets in simple and consistent manner. It includes support for low-level protocols such as IP, UDP and TCP, as well as higher-level protocols such as NMB and SMB.
+Impacket is highly effective when used in conjunction with a packet capture utility or package such as Pcapy. Packets can be constructed from scratch, as well as parsed from raw data. Furthermore, the object oriented API makes it simple to work with deep protocol hierarchies.
+
+• impacket-netview <user:pass>
+   ◇ -h → Ayuda de impacket
+   ◇ -target <ip> → Para fijar una ip objetivo
+   ◇ scripts de impacket en carpeta → /usr/share/doc/python3-impacket/examples 
+	
+
+
+• mssqlclient.py <user>@<ip_target> → Se conecta con un servidor MySQL
+   ◇ 
+
+
+
+ 
+
+5. What extended stored procedure of Microsoft SQL Server can be used in order to spawn a Windows command shell?   →    xp_cmdshell
+
+
+
+
+https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server
+
+https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet
+
+
+6. What script can be used in order to search possible paths to escalate privileges on Windows hosts?   →    winPEAS
+
+
+7. What file contains the administrator's password?   →    ConsoleHost_history.txt
+
+
+
+
+8. Submit user flag   →    3e7b102e78218e935bf3f4951fec21a3
+
+
+    
+
+
+
+Ya tendríamos una reverse shell en la maquina objetivo ejecutando la reverse shell nc64.exe 
+
+
+
+Si vamos a Desktop encontramos el archivo user.txt, con el comando type podemos ver su contenido y el flag del usuario
+
+
+9. Submit root flag   →   b91ccec3305e98240082d4474b848528
+
+
+
+
+Encontramos el flag en el fichero root.txt en el escritorio del usuario administrador
+

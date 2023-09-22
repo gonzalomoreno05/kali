@@ -1,0 +1,15 @@
+### User Information Gathering
+User Information Gathering
+
+1. Email Harvesting
+
+• theHarvester → Recopila emails, nombres, subdominios, IPs y URLs de diferentes fuentes de datos públicas.
+   ◇ -d <target_domain> → Especifica el dominio objetivo
+   ◇ -b <data_source> → Especifica la fuente donde se realizará la búsqueda
+
+2. Password Dumps
+
+Como rockyou. A veces se cuelgan en Pastebin o webs similares y son valiosas.
+
+https://haveibeenpwned.com/PwnedWebsites
+

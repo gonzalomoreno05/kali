@@ -1,0 +1,113 @@
+##### Vaccine
+Vaccine
+
+1. Besides SSH and HTTP, what other services is hosted on this box? → ftp
+
+
+
+2. This service can be configured to allow login with any password for specific username. What is that username? → anonymous
+
+The username that does not need password is “anonymous”
+
+
+
+3. What is the name of the file downloaded over this service? → backup.zip
+
+Con el comando ls vemos que existe un fichero llamado backup.zip
+
+
+
+Lo descargamos con el comando “get”
+
+
+
+4. What script comes with the John The Ripper toolset and generates a hash from a password protected zip archive in a format to allow for cracking attempts? → zip2john
+
+Utilizamos zip2john para convertir el fichero .zip en un formato que JohnTheRipper pueda crackear.
+
+
+
+5. What is the password for the admin user on the website? → qwerty789
+Utilizamos john para romper la contraseña con la wordlist rockyou.txt
+
+
+
+
+
+Con esta contraseña, utilizamos el comando unzip para descomprimir el fichero backup.zip protegido por contraseña, el cual nos proporciona dos nuevos ficheros.
+
+
+
+En el fichero index.php vemos el hash md5 de la la contraseña del usuario “admin” 
+
+
+
+Podemos utilizar el comando “hashcat” para descifrar este hash con la wordlist rockyou.txt
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+hashcat -a 0 -m0 hash /usr/share/wordlists/rockyou.txt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Obtenemos los siguientes resultados:
+
+
+
+
+Ahora tenemos que buscar la página web a la que dan acceso estas credenciales.
+
+Si ponemos en el navegador la ip de la máquina nos lleva directamente a una página de login en la que vamos a probar las credenciales obtenidas.
+
+
+
+Efectivamente, conseguimos acceso a la web
+
+
+
+Esta web parece contener una nase de datos de vehículos, por lo que podemos probar a hacer consultas sql para ver si conseguimos algún dato más. Para ello vamos a probar con sqlmap.
+
+Utilizamos el comando siguiente para detectar si es vulnerable:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sqlmap  -u '10.129.51.32/dashboard.php' --forms  --cookie="PHPSESSID=qt3bnvrdgr6k8ttf6mrk3d3ic5" --batch --dbs
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+Una vez comprobado que es vulnerable, añadimos la opción --os-shell al comando de sqlmap para que nos conceda acceso al sistema.
+
+
+
+6. What option can be passed to sqlmap to try to get command execution via the sql injection? →  --os-shell
+
+
+
+7. What program can the postgres user run as root using sudo? →  vi
+
+leemos /etc/passwd con cat y vemos que el usuario postgres pertenece al grupo administrator y que existe un usuario llamado simon 
+
+
+
+Podemos ver que tiene la clave ssh privada accesible, asi que si la copiamos y la añadimos a nuestro sistema con ssh-add podemos conseguir acceso por ssh al sistema, mucho más comodo que la shell que teniamos
+
+Si buscamos en /var/www/html encontramos los ficheros relativos a la página web. En el fichero dashboard.php encontramos el usuario y contraseña de postgres
+
+
+
+Para ver que comandos podemos ejecutar con sudo desde este usuario, utilizamos el comando sudo -l, lo cual nos muestra que el programa vi de edición de texto es el que se puede utilizar con permisos de administrador.
+
+
+
+8. Submit user flag → ec9b13ca4d6229cd5cc1e09980965bf7
+
+
+
+9. submit root flag → dd6e058e814260bc70e9bbdef2715849
+
+Como se puede usar el comando /bin/vi /etc/postgresql/qq/main/pg_hba.conf con permisos de administrador y vi permite la ejecución de comandos, si ejecutamos este comando como administrador y dentro de vi ponemos la orden :! /bin/bash, conseguimos una shell como root.
+
+
+

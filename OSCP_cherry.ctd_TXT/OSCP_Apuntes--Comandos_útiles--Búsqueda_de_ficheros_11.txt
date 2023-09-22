@@ -1,0 +1,27 @@
+### Búsqueda de ficheros
+Búsqueda de ficheros  
+•   locate → Búsqueda de ficheros, crea una base de datos local del sistema y busca en ella
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+updatedb 		# Crea la base de datos local
+locate <fichero> 		# Localiza el fichero
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   • which <fichero> → Busca en los directorios definidos en el $PATH del sistema y devuelve la ruta completa en la que se encuentra el fichero
+   
+   • find → Más agresivo, busca recursivamente en la ruta especificada
+      ◇ -ctime -<n> → Busca ficheros que se han modificado en los últimos ‘n’ días
+   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+find / -name sbd*   # Busca en todo el sistema (/) ficheros que comienzen por 'sbd'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      ◇  -group <group>  → Busca todos los ficheros que pertenecen al grupo especificado
+      
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+find / -group bugtracker 2>/dev/null
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   
+
+

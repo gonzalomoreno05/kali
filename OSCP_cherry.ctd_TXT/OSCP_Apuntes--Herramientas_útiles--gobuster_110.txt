@@ -1,0 +1,10 @@
+### gobuster
+Sirve para hacer búsquedas de fuerza bruta en una página web
+
+• gobuster →
+   ◇ -w <wordlist> → Wordlist que se quiere utilizar
+   ◇ --url <url> → URL a atacar
+   ◇ -t <n> → Número de threads
+   ◇ dir → Escaneo de directorios en la web
+   ◇ vhost → Modo de enumeración vhost (útil para enumerar subdominios)
+
